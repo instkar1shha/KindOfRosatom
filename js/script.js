@@ -1,4 +1,5 @@
-// Навигация по страницам
+document.addEventListener("DOMContentLoaded", () => {
+  // Навигация по страницам
   const navLinks = document.querySelectorAll("nav a");
   const pages = document.querySelectorAll(".page");
 
@@ -23,18 +24,30 @@
   document.querySelectorAll("[data-goto]").forEach(btn => {
     btn.addEventListener("click", () => {
       showPage(btn.dataset.goto);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 
-  // Фильтрация по городу
+  // ---------------- Город и динамическая главная ----------------
+
   const citySelect = document.getElementById("citySelect");
 
+  const currentCityLabel = document.getElementById("currentCityLabel");
+  const homeCityTitle = document.getElementById("homeCityTitle");
+  const homeNgoCount = document.getElementById("homeNgoCount");
+  const homeNextEventDate = document.getElementById("homeNextEventDate");
+  const homeNextEventText = document.getElementById("homeNextEventText");
+
+  // общий фильтр по городу для НКО / событий / новостей
   function applyCityFilter() {
-    const currentCity = citySelect.value;
+    if (!citySelect) return;
+
+    const city = citySelect.value;
     const cityElements = document.querySelectorAll("[data-city]");
+
     cityElements.forEach(el => {
       const elCity = el.dataset.city;
-      if (currentCity === "all" || elCity === currentCity || elCity === "all") {
+      if (city === "all" || elCity === city || elCity === "all") {
         el.style.display = "";
       } else {
         el.style.display = "none";
@@ -42,16 +55,79 @@
     });
   }
 
-  citySelect.addEventListener("change", applyCityFilter);
-  applyCityFilter();
+  // обновляем главную страницу под выбранный город
+  function updateHomeByCity() {
+    if (!citySelect) return;
 
-  // Поиск и фильтрация НКО
+    const city = citySelect.value;
+
+    if (currentCityLabel && homeCityTitle) {
+      if (city === "all") {
+        currentCityLabel.textContent = "Все города";
+        homeCityTitle.textContent = "Все города";
+      } else {
+        currentCityLabel.textContent = city;
+        homeCityTitle.textContent = city;
+      }
+    }
+
+    // считаем НКО по выбранному городу
+    if (homeNgoCount) {
+      const ngoCards = document.querySelectorAll("#ngoList .card");
+      const ngosForCity = Array.from(ngoCards).filter(card => {
+        const cardCity = card.dataset.city;
+        return city === "all" || cardCity === city;
+      });
+      homeNgoCount.textContent = ngosForCity.length;
+    }
+
+    // ближайшее событие по городу
+    if (homeNextEventDate && homeNextEventText) {
+      const eventCards = document.querySelectorAll("#eventList .card");
+      const eventsForCity = Array.from(eventCards).filter(card => {
+        const cardCity = card.dataset.city;
+        return city === "all" || cardCity === city;
+      });
+
+      if (eventsForCity.length > 0) {
+        const first = eventsForCity[0];
+        const titleEl = first.querySelector(".card-title");
+        const dateEl = first.querySelector(".event-date");
+
+        homeNextEventDate.textContent = dateEl ? dateEl.textContent : "";
+        homeNextEventText.textContent = titleEl ? titleEl.textContent : "";
+      } else {
+        homeNextEventDate.textContent = "";
+        if (city === "all") {
+          homeNextEventText.textContent = "Пока нет запланированных событий.";
+        } else {
+          homeNextEventText.textContent = "В этом городе пока нет запланированных событий.";
+        }
+      }
+    }
+  }
+
+  function handleCityChange() {
+    applyCityFilter();
+    updateHomeByCity();
+  }
+
+  if (citySelect) {
+    citySelect.addEventListener("change", handleCityChange);
+  }
+
+  // первый запуск
+  handleCityChange();
+
+  // ---------------- Поиск и фильтрация НКО ----------------
+
   const ngoSearch = document.getElementById("ngoSearch");
   const ngoCategory = document.getElementById("ngoCategory");
 
   function applyNgoFilter() {
-    const q = ngoSearch.value.toLowerCase();
-    const cat = ngoCategory.value;
+    const q = (ngoSearch?.value || "").toLowerCase();
+    const cat = ngoCategory?.value || "all";
+
     document.querySelectorAll("#ngoList .card").forEach(card => {
       const title = card.querySelector(".card-title").textContent.toLowerCase();
       const cardCat = card.dataset.category;
@@ -59,57 +135,70 @@
       const matchesCat = cat === "all" || cardCat === cat;
       card.style.display = matchesText && matchesCat ? "" : "none";
     });
-    applyCityFilter(); // ещё раз применим ограничение по городу
+
+    // дополнительно учитываем выбранный город
+    applyCityFilter();
   }
 
-  ngoSearch.addEventListener("input", applyNgoFilter);
-  ngoCategory.addEventListener("change", applyNgoFilter);
+  if (ngoSearch) ngoSearch.addEventListener("input", applyNgoFilter);
+  if (ngoCategory) ngoCategory.addEventListener("change", applyNgoFilter);
 
-  // Фильтр базы знаний
+  // ---------------- Фильтр базы знаний ----------------
+
   const kbCategory = document.getElementById("kbCategory");
-  kbCategory.addEventListener("change", () => {
-    const cat = kbCategory.value;
-    document.querySelectorAll("#kbList .card").forEach(card => {
-      const cardCat = card.dataset.category;
-      card.style.display = cat === "all" || cardCat === cat ? "" : "none";
+  if (kbCategory) {
+    kbCategory.addEventListener("change", () => {
+      const cat = kbCategory.value;
+      document.querySelectorAll("#kbList .card").forEach(card => {
+        const cardCat = card.dataset.category;
+        card.style.display = cat === "all" || cardCat === cat ? "" : "none";
+      });
     });
-  });
+  }
 
-  // Фильтр событий по типу
+  // ---------------- Фильтр событий по типу ----------------
+
   const eventType = document.getElementById("eventType");
-  eventType.addEventListener("change", () => {
-    const type = eventType.value;
-    document.querySelectorAll("#eventList .card").forEach(card => {
-      const cardType = card.dataset.type;
-      card.style.display = type === "all" || cardType === type ? "" : "none";
+  if (eventType) {
+    eventType.addEventListener("change", () => {
+      const type = eventType.value;
+      document.querySelectorAll("#eventList .card").forEach(card => {
+        const cardType = card.dataset.type;
+        card.style.display = type === "all" || cardType === type ? "" : "none";
+      });
+      applyCityFilter();
     });
-    applyCityFilter();
-  });
+  }
 
-  // Фильтр новостей по охвату
+  // ---------------- Фильтр новостей по охвату ----------------
+
   const newsScope = document.getElementById("newsScope");
-  newsScope.addEventListener("change", () => {
-    const scope = newsScope.value;
-    const currentCity = citySelect.value;
-    document.querySelectorAll("#newsList .card").forEach(card => {
-      const cardCity = card.dataset.city;
-      let show = true;
+  if (newsScope) {
+    newsScope.addEventListener("change", () => {
+      const scope = newsScope.value;
+      const currentCity = citySelect ? citySelect.value : "all";
 
-      if (scope === "city") {
-        show = currentCity === "all"
-          ? cardCity !== "all"
-          : (cardCity === currentCity);
-      } else if (scope === "global") {
-        show = cardCity === "all";
-      } else {
-        show = true;
-      }
+      document.querySelectorAll("#newsList .card").forEach(card => {
+        const cardCity = card.dataset.city;
+        let show = true;
 
-      card.style.display = show ? "" : "none";
+        if (scope === "city") {
+          show = currentCity === "all"
+            ? cardCity !== "all"
+            : (cardCity === currentCity);
+        } else if (scope === "global") {
+          show = cardCity === "all";
+        } else {
+          show = true;
+        }
+
+        card.style.display = show ? "" : "none";
+      });
     });
-  });
+  }
 
-  // Избранное через localStorage (очень простая реализация)
+  // ---------------- Избранное через localStorage ----------------
+
   const favoritesKey = "ddr-favorites";
 
   function loadFavorites() {
@@ -148,94 +237,46 @@
 
   updateFavoriteUI();
 
-  // Кнопки "добавить" — пока просто алерты-заглушки
-  document.getElementById("addNgoBtn").addEventListener("click", () => {
-    alert("Здесь будет форма добавления НКО (доступно администратору/представителю НКО).");
-  });
-  document.getElementById("addKbBtn").addEventListener("click", () => {
-    alert("Здесь будет форма добавления материала в базу знаний (для администратора).");
-  });
-  document.getElementById("addEventBtn").addEventListener("click", () => {
-    alert("Здесь будет форма добавления события с отправкой на модерацию.");
-  });
-  document.getElementById("addNewsBtn").addEventListener("click", () => {
-    alert("Здесь будет форма добавления новости (для администратора).");
-  
+  // ---------------- Заглушки для кнопок "добавить" ----------------
 
-const citySelect = document.getElementById("citySelect");
-
-  const currentCityLabel = document.getElementById("currentCityLabel");
-  const homeCityTitle = document.getElementById("homeCityTitle");
-  const homeNgoCount = document.getElementById("homeNgoCount");
-  const homeNextEventDate = document.getElementById("homeNextEventDate");
-  const homeNextEventText = document.getElementById("homeNextEventText");
-
-  function applyCityFilter() {
-    const city = citySelect.value;
-    const cityElements = document.querySelectorAll("[data-city]");
-
-    cityElements.forEach(el => {
-      const elCity = el.dataset.city;
-      if (city === "all" || elCity === city || elCity === "all") {
-        el.style.display = "";
-      } else {
-        el.style.display = "none";
-      }
+  const addNgoBtn = document.getElementById("addNgoBtn");
+  if (addNgoBtn) {
+    addNgoBtn.addEventListener("click", () => {
+      alert("Здесь будет форма добавления НКО (доступно администратору/представителю НКО).");
     });
   }
 
-  function updateHomeByCity() {
-    const city = citySelect.value;
-
-    if (city === "all") {
-      currentCityLabel.textContent = "Все города";
-      homeCityTitle.textContent = "Все города";
-    } else {
-      currentCityLabel.textContent = city;
-      homeCityTitle.textContent = city;
-    }
-
-    const ngoCards = document.querySelectorAll("#ngoList .card");
-    const ngosForCity = Array.from(ngoCards).filter(card => {
-      const cardCity = card.dataset.city;
-      return city === "all" || cardCity === city;
+  const addKbBtn = document.getElementById("addKbBtn");
+  if (addKbBtn) {
+    addKbBtn.addEventListener("click", () => {
+      alert("Здесь будет форма добавления материала в базу знаний (для администратора).");
     });
-    homeNgoCount.textContent = ngosForCity.length;
+  }
 
-    const eventCards = document.querySelectorAll("#eventList .card");
-    const eventsForCity = Array.from(eventCards).filter(card => {
-      const cardCity = card.dataset.city;
-      return city === "all" || cardCity === city;
+  const addEventBtn = document.getElementById("addEventBtn");
+  if (addEventBtn) {
+    addEventBtn.addEventListener("click", () => {
+      alert("Здесь будет форма добавления события с отправкой на модерацию.");
     });
-
-    if (eventsForCity.length > 0) {
-      const first = eventsForCity[0];
-      const titleEl = first.querySelector(".card-title");
-      const dateEl = first.querySelector(".event-date");
-
-      homeNextEventDate.textContent = dateEl ? dateEl.textContent : "";
-      homeNextEventText.textContent = titleEl ? titleEl.textContent : "";
-    } else {
-      homeNextEventDate.textContent = "";
-      if (city === "all") {
-        homeNextEventText.textContent = "Пока нет запланированных событий.";
-      } else {
-        homeNextEventText.textContent = "В этом городе пока нет запланированных событий.";
-      }
-    }
   }
 
-  function handleCityChange() {
-    applyCityFilter();
-    updateHomeByCity();
+  const addNewsBtn = document.getElementById("addNewsBtn");
+  if (addNewsBtn) {
+    addNewsBtn.addEventListener("click", () => {
+      alert("Здесь будет форма добавления новости (для администратора).");
+    });
   }
-  
-  if (citySelect) {
-    citySelect.addEventListener("change", handleCityChange);
-    applyCityFilter();
-    updateHomeByCity();
+}); // конец DOMContentLoaded
+
+// ---------------- Прелоадер: скрыть после полной загрузки ----------------
+
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    // задержка перед скрытием прелоадера (в миллисекундах)
+    setTimeout(() => {
+      preloader.classList.add("preloader-hidden");
+    }, 1000); // 1000 = 1 сек; можно поставить 1500 или 2000
   }
-
-
-
 });
+
