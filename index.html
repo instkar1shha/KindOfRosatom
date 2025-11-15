@@ -17,7 +17,6 @@
     <div class="cube"></div>
   </div>
 </div>
-
 <header>
   <div class="header-inner">
     <div class="logo-block">
@@ -33,6 +32,7 @@
         <li><a data-page="ngos">НКО</a></li>
         <li><a data-page="knowledge">База знаний</a></li>
         <li><a data-page="calendar">Календарь</a></li>
+         <li><a data-page="map">Карта добрых дел</a></li>
         <li><a data-page="news">Новости</a></li>
         <li><a data-page="profile">Личный кабинет</a></li>
       </ul>
@@ -256,6 +256,81 @@
         <div class="card-title">Волонтёрский визит в дом ветеранов</div>
         <div class="card-meta">Организатор: «Тепло рядом» · Обнинск</div>
         <p>Творческие мастер-классы и концерт для жителей дома ветеранов.</p>
+      </article>
+    </div>
+  </section>
+
+   <section id="page-map" class="page">
+    <div class="section-header">
+      <h2>Карта добрых дел</h2>
+      <small>Инициативы и события на карте городов присутствия Росатома</small>
+    </div>
+
+    <div class="filters">
+      <select id="mapCityFilter">
+        <option value="all">Все города</option>
+        <option>Ангарск</option>
+        <option>Байкальск</option>
+        <option>Балаково</option>
+        <option>Билибино</option>
+        <option>Волгодонск</option>
+        <option>Глазов</option>
+        <option>Десногорск</option>
+        <option>Димитровград</option>
+        <option>Железногорск</option>
+        <option>Заречный (Пензенская обл.)</option>
+        <option>Заречный (Свердловская обл.)</option>
+        <option>Зеленогорск</option>
+        <option>Краснокаменск</option>
+        <option>Курчатов</option>
+        <option>Лесной</option>
+        <option>Неман</option>
+        <option>Нововоронеж</option>
+        <option>Новоуральск</option>
+        <option>Обнинск</option>
+        <option>Озерск</option>
+        <option>Певек</option>
+        <option>Полярные Зори</option>
+        <option>Саров</option>
+        <option>Северск</option>
+        <option>Снежинск</option>
+        <option>Советск</option>
+        <option>Сосновый Бор</option>
+        <option>Трехгорный</option>
+        <option>Удомля</option>
+        <option>Усолье-Сибирское</option>
+        <option>Электросталь</option>
+        <option>Энергодар</option>
+      </select>
+      <span style="font-size:13px; color: var(--muted);">
+        В финальной версии здесь будет интерактивная карта (Яндекс/Leaflet). 
+        В прототипе — заглушка и описание сценариев.
+      </span>
+    </div>
+
+    <div class="cards-list">
+      <article class="card">
+        <div class="card-title">Интерактивная карта инициатив</div>
+        <div class="card-meta">Прототип функционала</div>
+        <p>
+          На карте пользователь сможет выбрать город присутствия Росатома
+          и увидеть активные НКО, точки проведения мероприятий и ключевые площадки.
+        </p>
+        <p style="font-size:13px; margin-top:6px;">
+          В рабочей версии здесь будет интеграция с картографическим сервисом
+          (Яндекс.Карты / 2ГИС / Leaflet) и фильтрами по типу инициатив.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-title">Сценарии использования</div>
+        <div class="card-meta">Для жителей и координаторов</div>
+        <ul style="font-size:13px; margin-left:16px; margin-top:4px;">
+          <li>Найти ближайшие события по интересам и городу.</li>
+          <li>Увидеть, какие НКО действуют в своём районе.</li>
+          <li>Координаторам КСО — планировать акции по локациям.</li>
+          <li>Показать наглядную карту добрых дел для отчётности и коммуникаций.</li>
+        </ul>
       </article>
     </div>
   </section>
