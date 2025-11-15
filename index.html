@@ -75,6 +75,19 @@
         <option>Энергодар</option>
       </select>
     </div>
+    <div class="role-select">
+      <span>Роль:</span>
+      <select id="roleSelect">
+        <option value="guest">Гость</option>
+        <option value="volunteer">Волонтёр</option>
+        <option value="ngo">НКО</option>
+        <option value="moderator">Модератор</option>
+        <option value="admin">Админ Росатома</option>
+      </select>
+      <div class="role-hint" id="currentRoleDescription">
+        Просмотр сайта без авторизации.
+      </div>
+    </div>
   </div>
 </header>
 
@@ -198,6 +211,81 @@
       </select>
       <button class="btn btn-ghost" id="addNgoBtn">+ Добавить НКО</button>
     </div>
+    <div id="ngoFormCard" class="card" style="display: none;">
+    <div class="card-title">Новое НКО</div>
+    <form id="ngoForm" class="ngo-form">
+      <label>
+        Название НКО *
+        <input
+          type="text"
+          id="ngoName"
+          name="name"
+          required
+          placeholder="Например, «Тепло рядом»"
+        />
+      </label>
+
+      <div class="form-row">
+        <label>
+          Город *
+          <select id="ngoCity" name="city" required>
+            <option value="Сосновый Бор">Сосновый Бор</option>
+            <option value="Обнинск">Обнинск</option>
+            <option value="Северск">Северск</option>
+          </select>
+        </label>
+
+        <label>
+          Направление
+          <select id="ngoCategoryInput" name="category">
+            <option value="social">Социальные инициативы</option>
+            <option value="eco">Экология</option>
+            <option value="culture">Культура</option>
+            <option value="sport">Спорт</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        Краткое описание
+        <textarea
+          id="ngoDescription"
+          name="description"
+          rows="3"
+          placeholder="Опишите, чем занимается организация и кого она поддерживает."
+        ></textarea>
+      </label>
+
+      <label>
+        Адрес
+        <input
+          type="text"
+          id="ngoAddress"
+          name="address"
+          placeholder="Например, ул. Центральная, 10"
+        />
+      </label>
+
+      <label>
+        Сайт или соцсети
+        <input
+          type="url"
+          id="ngoSite"
+          name="site"
+          placeholder="https://..."
+        />
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <button type="button" class="btn btn-ghost" id="cancelNgoFormBtn">
+          Отмена
+        </button>
+      </div>
+
+      <p id="ngoFormMessage" class="form-message"></p>
+    </form>
+  </div>
     <div id="ngoList" class="cards-list">
       <!-- Пример НКО -->
       <article class="card" data-city="Сосновый Бор" data-category="eco">
@@ -576,6 +664,103 @@
       </select>
       <button class="btn btn-ghost" id="addNewsBtn">+ Добавить новость</button>
     </div>
+     <div id="newsFormCard" class="card" style="display: none;">
+      <div class="card-title">Новая новость</div>
+      <form id="newsForm" class="news-form">
+        <div class="form-row">
+          <label>
+            Город
+            <select id="newsCity" name="city">
+              <option value="all">Все города</option>
+              <option>Ангарск</option>
+              <option>Байкальск</option>
+              <option>Балаково</option>
+              <option>Билибино</option>
+              <option>Волгодонск</option>
+              <option>Глазов</option>
+              <option>Десногорск</option>
+              <option>Димитровград</option>
+              <option>Железногорск</option>
+              <option>Заречный (Пензенская обл.)</option>
+              <option>Заречный (Свердловская обл.)</option>
+              <option>Зеленогорск</option>
+              <option>Краснокаменск</option>
+              <option>Курчатов</option>
+              <option>Лесной</option>
+              <option>Неман</option>
+              <option>Нововоронеж</option>
+              <option>Новоуральск</option>
+              <option>Обнинск</option>
+              <option>Озерск</option>
+              <option>Певек</option>
+              <option>Полярные Зори</option>
+              <option>Саров</option>
+              <option>Северск</option>
+              <option>Снежинск</option>
+              <option>Советск</option>
+              <option>Сосновый Бор</option>
+              <option>Трехгорный</option>
+              <option>Удомля</option>
+              <option>Усолье-Сибирское</option>
+              <option>Электросталь</option>
+              <option>Энергодар</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Заголовок *
+          <input
+            type="text"
+            id="newsTitle"
+            name="title"
+            required
+            placeholder="Например, «Запуск нового волонтёрского проекта»"
+          />
+        </label>
+
+        <label>
+          Текст новости *
+          <textarea
+            id="newsText"
+            name="text"
+            rows="4"
+            required
+            placeholder="Кратко опишите, что произошло, кто участвовал и какой результат."
+          ></textarea>
+        </label>
+
+        <label>
+          Ссылка на изображение (опционально)
+          <input
+            type="url"
+            id="newsImageUrl"
+            name="imageUrl"
+            placeholder="https://..."
+          />
+        </label>
+
+        <label>
+          Ссылка на файл / документ (опционально)
+          <input
+            type="url"
+            id="newsFileUrl"
+            name="fileUrl"
+            placeholder="https://..."
+          />
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+          <button type="button" class="btn btn-ghost" id="cancelNewsFormBtn">
+            Отмена
+          </button>
+        </div>
+
+        <p id="newsFormMessage" class="form-message"></p>
+      </form>
+    </div>
+
     <div id="newsList" class="cards-list">
       <article class="card" data-city="all">
         <div class="news-date">15 ноября 2025 · Все города</div>
@@ -595,32 +780,57 @@
   <section id="page-profile" class="page">
     <div class="section-header">
       <h2>Личный кабинет</h2>
-      <small>Заглушка для демонстрации функционала</small>
+      <small>Сценарии зависят от выбранной роли</small>
     </div>
 
     <div class="card" style="margin-bottom:12px;">
-      <div class="card-title">Авторизация</div>
+      <div class="card-title">Текущая роль</div>
       <p style="font-size:13px; margin-top:4px;">
-        Для прототипа можно реализовать простую форму входа (email + пароль) без реального backend.
-        На хакатоне достаточно показать сценарий входа и условное отображение данных.
+        Сейчас вы просматриваете портал как
+        <strong id="currentRoleLabel">гость</strong>.
+        Переключите роль в шапке, чтобы посмотреть, как меняется функциональность.
       </p>
     </div>
 
     <div class="card" style="margin-bottom:12px;">
-      <div class="card-title">Избранное</div>
-      <p style="font-size:13px; margin-top:4px;">
-        Здесь будут отображаться избранные НКО, события и материалы базы знаний,
-        выбранные пользователем (можно хранить в localStorage).
-      </p>
+      <div class="card-title">Права ролей</div>
+      <ul style="font-size:13px; margin-top:4px; padding-left:18px;">
+        <li><strong>Админ Росатома</strong> — полный доступ ко всем разделам и данным портала.</li>
+        <li><strong>Модератор</strong> — управляет НКО, событиями, базой знаний и новостями.</li>
+        <li><strong>НКО</strong> — управляет своими событиями и страницей организации.</li>
+        <li><strong>Волонтёр</strong> — просматривает НКО и события, отмечает избранное.</li>
+        <li><strong>Гость</strong> — только просмотр открытой информации.</li>
+      </ul>
     </div>
 
     <div class="card">
-      <div class="card-title">Моя организация / события</div>
-      <p style="font-size:13px; margin-top:4px;">
-        Для представителей НКО здесь можно показывать страницу с информацией об организации
-        и форму добавления событий. Для администратора — интерфейс модерации.
-      </p>
+    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>Избранное</span>
+      <button id="clearAllFavoritesBtn" class="btn btn-ghost" style="font-size:12px; padding:4px 8px;">
+        Очистить всё
+      </button>
     </div>
+
+    <p style="font-size:13px; margin-top:4px;">
+      Отмечайте карточки звёздочкой — здесь будут отображаться ваши избранные НКО,
+      события и новости. Данные сохраняются в&nbsp;вашем браузере.
+    </p>
+
+    <div class="favorites-block">
+      <h3 style="font-size:14px; margin-top:10px; margin-bottom:4px;">НКО</h3>
+      <div id="favoritesNgoList" class="favorites-list"></div>
+    </div>
+
+    <div class="favorites-block">
+      <h3 style="font-size:14px; margin-top:10px; margin-bottom:4px;">События</h3>
+      <div id="favoritesEventList" class="favorites-list"></div>
+    </div>
+
+    <div class="favorites-block">
+      <h3 style="font-size:14px; margin-top:10px; margin-bottom:4px;">Новости</h3>
+      <div id="favoritesNewsList" class="favorites-list"></div>
+    </div>
+  </div>
   </section>
 </main>
 
