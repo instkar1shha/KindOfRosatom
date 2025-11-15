@@ -5,6 +5,12 @@
       --text: #1f2933;
       --muted: #6b7280;
       --radius: 12px;
+       --calendar-bg: #d9dde3;
+  --calendar-dark: #222222;
+  --accent-orange: #fd6925;
+  --accent-yellow: #fcc30b;
+  --accent-magenta: #e20072;
+  --accent-green: #56c02b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -487,6 +493,219 @@ background: var(--primary);
     top: 4vmin;
     width: calc(100% - 2vmin);
     height: calc(100% - 2vmin);
+  }
+}
+
+/* ====== КАЛЕНДАРЬ НОЯБРЯ ====== */
+
+.calendar-wrapper {
+  background: var(--calendar-bg);
+  border-radius: 24px;
+  padding: 20px 24px 24px;
+  margin-top: 12px;
+}
+
+/* верхняя часть: месяц + "таймер" */
+.calendar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.calendar-month-name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.calendar-year {
+  font-size: 26px;
+  margin-left: 8px;
+  color: var(--primary-light);
+  font-weight: 700;
+}
+
+.calendar-countdown {
+  background: #121212;
+  border-radius: 18px;
+  padding: 12px 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.countdown-item {
+  text-align: center;
+  min-width: 60px;
+}
+
+.countdown-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 2px solid #ffffff;
+}
+
+.countdown-label {
+  font-size: 11px;
+  color: #e5e7eb;
+  margin-top: 4px;
+}
+
+/* дни недели */
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--calendar-dark);
+}
+
+.calendar-weekdays > div {
+  padding: 4px 0;
+}
+
+/* сетка дней */
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calendar-day {
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 6px 8px;
+  min-height: 62px;
+  border: 2px solid rgba(15,23,42,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.calendar-day--muted {
+  background: #eef1f5;
+  color: #9ca3af;
+  border-style: dashed;
+}
+
+.calendar-date {
+  font-weight: 700;
+}
+
+.calendar-icons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.calendar-icon {
+  font-size: 16px;
+}
+
+/* выделение дня с событием */
+
+.calendar-day--has-event {
+  border-color: var(--primary-light);
+  box-shadow: 0 3px 8px rgba(15,23,42,0.18);
+  cursor: pointer;
+}
+
+/* цветовые акценты по темам */
+
+.calendar-day--theme-eco {
+  border-color: var(--accent-green);
+}
+
+.calendar-day--theme-social {
+  border-color: var(--primary);
+}
+
+.calendar-day--theme-culture {
+  border-color: var(--accent-magenta);
+}
+
+.calendar-day--theme-edu {
+  border-color: var(--primary-light);
+}
+
+.calendar-day--theme-sport {
+  border-color: var(--accent-orange);
+}
+
+/* всплывающая карточка события при наведении */
+
+.calendar-event-pop {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 10px);
+  width: 230px;
+  background: #ffe9d8;
+  border-radius: 18px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  font-size: 12px;
+  color: var(--calendar-dark);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+  z-index: 5;
+}
+
+.calendar-event-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.calendar-event-text {
+  line-height: 1.35;
+}
+
+.calendar-day--has-event:hover .calendar-event-pop {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 4px);
+}
+
+/* адаптив для маленьких экранов */
+@media (max-width: 768px) {
+  .calendar-wrapper {
+    padding: 14px 10px 16px;
+  }
+
+  .calendar-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .calendar-countdown {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .calendar-days {
+    gap: 6px;
+  }
+
+  .calendar-day {
+    min-height: 56px;
+  }
+
+  .calendar-event-pop {
+    width: 200px;
   }
 }
 

@@ -270,41 +270,200 @@
   </section>
 
   <!-- Календарь -->
-  <section id="page-calendar" class="page">
-    <div class="section-header">
-      <h2>Календарь событий</h2>
-      <small>Мероприятия НКО по городам</small>
-    </div>
-    <div class="filters">
-      <select id="eventType">
-        <option value="all">Все типы событий</option>
-        <option value="eco">Экология</option>
-        <option value="social">Социальные</option>
-        <option value="culture">Культура</option>
-        <option value="sport">Спорт</option>
-      </select>
-      <button class="btn btn-ghost" id="addEventBtn">+ Добавить событие</button>
-    </div>
-    <div id="eventList" class="cards-list">
-      <article class="card" data-city="Сосновый Бор" data-type="eco">
-        <div class="event-date">18 ноября 2025 · 10:00</div>
-        <div class="card-title">Эко-субботник на набережной</div>
-        <div class="card-meta">Организатор: «Чистый Берег» · Сосновый Бор</div>
-        <p>Уборка береговой линии и мастер-класс по раздельному сбору отходов.</p>
-        <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
-          <button class="btn btn-primary" style="font-size:12px;">Записаться</button>
-          <div class="favorite-toggle" data-type="event" data-id="event1">☆</div>
-        </div>
-      </article>
+<section id="page-calendar" class="page">
+  <div class="section-header">
+    <h2>Календарь добрых дел</h2>
+    <small>Мероприятия НКО в ноябре 2025 года</small>
+  </div>
 
-      <article class="card" data-city="Обнинск" data-type="social">
-        <div class="event-date">25 ноября 2025 · 15:00</div>
-        <div class="card-title">Волонтёрский визит в дом ветеранов</div>
-        <div class="card-meta">Организатор: «Тепло рядом» · Обнинск</div>
-        <p>Творческие мастер-классы и концерт для жителей дома ветеранов.</p>
-      </article>
+  <!-- ОБЩИЙ БЛОК КАЛЕНДАРЯ -->
+  <div class="calendar-wrapper">
+    <!-- Верхняя часть: месяц + "таймер" как в референсе -->
+    <div class="calendar-top">
+      <div class="calendar-month">
+        <span class="calendar-month-name">НОЯБРЬ</span>
+        <span class="calendar-year">2025</span>
+      </div>
+
+      <div class="calendar-countdown">
+  <div class="countdown-item">
+    <div class="countdown-value" id="cdDays">00</div>
+    <div class="countdown-label">Days</div>
+  </div>
+  <div class="countdown-item">
+    <div class="countdown-value" id="cdHours">00</div>
+    <div class="countdown-label">Hours</div>
+  </div>
+  <div class="countdown-item">
+    <div class="countdown-value" id="cdMinutes">00</div>
+    <div class="countdown-label">Minutes</div>
+  </div>
+  <div class="countdown-item">
+    <div class="countdown-value" id="cdSeconds">00</div>
+    <div class="countdown-label">Seconds</div>
+  </div>
+</div>
+
     </div>
-  </section>
+
+    <!-- Дни недели -->
+    <div class="calendar-weekdays">
+      <div>ПН</div>
+      <div>ВТ</div>
+      <div>СР</div>
+      <div>ЧТ</div>
+      <div>ПТ</div>
+      <div>СБ</div>
+      <div>ВС</div>
+    </div>
+
+    <!-- СЕТКА ДНЕЙ НОЯБРЯ С 5 СОБЫТИЯМИ -->
+    <div class="calendar-days">
+      <!-- хвост октября -->
+      <div class="calendar-day calendar-day--muted">27.10</div>
+      <div class="calendar-day calendar-day--muted">28.10</div>
+      <div class="calendar-day calendar-day--muted">29.10</div>
+      <div class="calendar-day calendar-day--muted">30.10</div>
+      <div class="calendar-day calendar-day--muted">31.10</div>
+      <div class="calendar-day"><span class="calendar-date">01.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">02.11</span></div>
+
+      <!-- 1-я неделя ноября -->
+      <div class="calendar-day"><span class="calendar-date">03.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">04.11</span></div>
+
+      <!-- 1: ЭКО-инициатива -->
+      <div class="calendar-day calendar-day--has-event calendar-day--theme-eco">
+        <span class="calendar-date">05.11</span>
+        <div class="calendar-icons">
+          <span class="calendar-icon">🌿</span>
+        </div>
+        <div class="calendar-event-pop">
+          <div class="calendar-event-title">Эко-субботник</div>
+          <div class="calendar-event-text">
+            НКО «Чистый берег» · уборка парка и раздельный сбор отходов.
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-day"><span class="calendar-date">06.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">07.11</span></div>
+
+      <!-- 2: Социальная поддержка -->
+      <div class="calendar-day calendar-day--has-event calendar-day--theme-social">
+        <span class="calendar-date">08.11</span>
+        <div class="calendar-icons">
+          <span class="calendar-icon">🤝</span>
+        </div>
+        <div class="calendar-event-pop">
+          <div class="calendar-event-title">Волонтёрский визит</div>
+          <div class="calendar-event-text">
+            НКО «Тепло рядом» · общение с пожилыми людьми и помощь по дому.
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-day"><span class="calendar-date">09.11</span></div>
+
+      <!-- 2-я неделя -->
+      <div class="calendar-day"><span class="calendar-date">10.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">11.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">12.11</span></div>
+
+      <!-- 3: Культура / дети -->
+      <div class="calendar-day calendar-day--has-event calendar-day--theme-culture">
+        <span class="calendar-date">13.11</span>
+        <div class="calendar-icons">
+          <span class="calendar-icon">🎨</span>
+        </div>
+        <div class="calendar-event-pop">
+          <div class="calendar-event-title">Творческий мастер-класс</div>
+          <div class="calendar-event-text">
+            НКО «Окно в мир» · занятие для детей по созданию плакатов добрых дел.
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-day"><span class="calendar-date">14.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">15.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">16.11</span></div>
+
+      <!-- 3-я неделя -->
+      <div class="calendar-day"><span class="calendar-date">17.11</span></div>
+
+      <!-- 4: Обучение НКО -->
+      <div class="calendar-day calendar-day--has-event calendar-day--theme-edu">
+        <span class="calendar-date">18.11</span>
+        <div class="calendar-icons">
+          <span class="calendar-icon">📚</span>
+        </div>
+        <div class="calendar-event-pop">
+          <div class="calendar-event-title">Вебинар для НКО</div>
+          <div class="calendar-event-text">
+            Работа с волонтёрами, грантовые конкурсы и отчётность по проектам.
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-day"><span class="calendar-date">19.11</span></div>
+
+      <!-- 5: Спорт / ЗОЖ -->
+      <div class="calendar-day calendar-day--has-event calendar-day--theme-sport">
+        <span class="calendar-date">20.11</span>
+        <div class="calendar-icons">
+          <span class="calendar-icon">⚽</span>
+        </div>
+        <div class="calendar-event-pop">
+          <div class="calendar-event-title">Благотворительный забег</div>
+          <div class="calendar-event-text">
+            Сбор средств на поддержку детских спортивных секций.
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-day"><span class="calendar-date">21.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">22.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">23.11</span></div>
+
+      <!-- хвост ноября -->
+      <div class="calendar-day"><span class="calendar-date">24.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">25.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">26.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">27.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">28.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">29.11</span></div>
+      <div class="calendar-day"><span class="calendar-date">30.11</span></div>
+
+      <!-- начало декабря для ровной сетки -->
+      <div class="calendar-day calendar-day--muted">01.12</div>
+      <div class="calendar-day calendar-day--muted">02.12</div>
+      <div class="calendar-day calendar-day--muted">03.12</div>
+      <div class="calendar-day calendar-day--muted">04.12</div>
+      <div class="calendar-day calendar-day--muted">05.12</div>
+      <div class="calendar-day calendar-day--muted">06.12</div>
+      <div class="calendar-day calendar-day--muted">07.12</div>
+    </div>
+  </div>
+
+  <!-- НИЖЕ ОСТАВЛЯЕМ ТВОИ ФИЛЬТРЫ И СПИСОК СОБЫТИЙ -->
+  <div class="section-header" style="margin-top:24px;">
+    <h2>Список событий</h2>
+    <small>Подробное описание мероприятий</small>
+  </div>
+  <div class="filters">
+    <select id="eventType">
+      <option value="all">Все типы событий</option>
+      <option value="eco">Экология</option>
+      <option value="social">Социальные</option>
+      <option value="culture">Культура</option>
+      <option value="sport">Спорт</option>
+    </select>
+    <button class="btn btn-ghost" id="addEventBtn">+ Добавить событие</button>
+  </div>
+  <div id="eventList" class="cards-list">
+    <!-- здесь оставь свои карточки событий, как были -->
+  </div>
+</section>
 
   <section id="page-map" class="page">
   <div class="section-header">
