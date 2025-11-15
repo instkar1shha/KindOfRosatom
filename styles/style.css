@@ -1,0 +1,303 @@
+:root {
+      --primary: rgba(2,94,161);   /* условный синий */
+      --primary-light: rgba(108,172,228);
+      --bg: #f5f7fa;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+   body {
+  font-family: "Rosatom";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      gap: 16px;
+    }
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* небольшой квадрат-контейнер под логотип */
+.logo-circle {
+  width: 40px;      /* размер, который увидишь в шапке */
+  height: 40px;
+  border: none;
+  border-radius: 50%;     /* можно убрать, если не нужен круг */
+  overflow: hidden;       /* обрезаем лишний “ореол” */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* сильно увеличиваем сам логотип внутри и обрезаем края */
+.logo-circle .logo-img {
+  width: 260%;      /* поиграйся: 220–300% */
+  height: 260%;
+  object-fit: cover;
+  display: block;
+}
+   .site-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+h1,
+.section-header h2,
+.card-title {
+  font-weight: 700;
+}
+
+
+    nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      font-size: 14px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    nav a.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .city-select {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .city-select select {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    
+    main {
+      max-width: 1100px;
+      margin: 16px auto;
+      padding: 0 16px 32px;
+    }
+    .hero-city {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary-light), #ffffff);
+      border-radius: 16px;
+      padding: 24px;
+      display: grid;
+      gap: 20px;
+    }
+    .hero h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .btn-ghost {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid #d1d5db;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-subtitle {
+    font-weight: 300; /* Rosatom-Light */
+    margin-top: 8px;
+    font-size: 15px;
+  }
+  .card-meta,
+  event-date,
+  .news-date,
+  .kb-type,
+  .badge-city,
+  footer {
+  font-weight: 300;  /* Light */
+  }
+
+
+    .home-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: 0 2px 4px rgba(15,23,42,0.04);
+      border: 1px solid #e5e7eb;
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .card-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .card p {
+      font-size: 13px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+    .section-header h2 {
+      font-size: 18px;
+    }
+    .section-header small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .filters input,
+    .filters select {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+
+    .cards-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e5f3ff;
+      color: var(--primary);
+      font-size: 11px;
+      margin-right: 4px;
+    }
+
+    .badge-city {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .favorite-toggle {
+      margin-left: auto;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+    }
+
+    .event-date {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .news-date {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .kb-type {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 12px 16px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }

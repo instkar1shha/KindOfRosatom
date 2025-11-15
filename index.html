@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="styles/fonts_style.css">
+    <link rel="stylesheet" href="styles/style.css">
+      
+  <meta charset="UTF-8" />
+  <title>Добрые дела Росатома</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-block">
+  <div class="logo-circle">
+    <img src="/styles/images/rosatom_logo.png" alt="Логотип Росатома" class="logo-img">
+  </div>
+  <div class="site-title">Добрые дела Росатома</div>
+</div>
+
+    <nav>
+      <ul>
+        <li><a data-page="home" class="active">Главная</a></li>
+        <li><a data-page="ngos">НКО</a></li>
+        <li><a data-page="knowledge">База знаний</a></li>
+        <li><a data-page="calendar">Календарь</a></li>
+        <li><a data-page="news">Новости</a></li>
+        <li><a data-page="profile">Личный кабинет</a></li>
+      </ul>
+    </nav>
+    <div class="city-select">
+      <span>Город:</span>
+      <select id="citySelect">
+        <option value="all">Все города</option>
+        <option>Ангарск</option>
+        <option>Байкальск</option>
+        <option>Балаково</option>
+        <option>Билибино</option>
+        <option>Волгодонск</option>
+        <option>Глазов</option>
+        <option>Десногорск</option>
+        <option>Димитровград</option>
+        <option>Железногорск</option>
+        <option>Заречный (Пензенская обл.)</option>
+        <option>Заречный (Свердловская обл.)</option>
+        <option>Зеленогорск</option>
+        <option>Краснокаменск</option>
+        <option>Курчатов</option>
+        <option>Лесной</option>
+        <option>Неман</option>
+        <option>Нововоронеж</option>
+        <option>Новоуральск</option>
+        <option>Обнинск</option>
+        <option>Озерск</option>
+        <option>Певек</option>
+        <option>Полярные Зори</option>
+        <option>Саров</option>
+        <option>Северск</option>
+        <option>Снежинск</option>
+        <option>Советск</option>
+        <option>Сосновый Бор</option>
+        <option>Трехгорный</option>
+        <option>Удомля</option>
+        <option>Усолье-Сибирское</option>
+        <option>Электросталь</option>
+        <option>Энергодар</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Главная -->
+  <section id="page-home" class="page active">
+  <div class="hero">
+    <div>
+      <h1>Добрые дела Росатома — все инициативы вашего города в одном месте</h1>
+      <p>
+        Единый портал для жителей, волонтёров и НКО, где собрана вся информация
+        о социальных, экологических, культурных, образовательных и спортивных
+        инициативах в городах присутствия Росатома.
+      </p>
+
+      <!-- НОВОЕ: текущий город -->
+      <p class="hero-city">
+        Сейчас выбран: <span id="currentCityLabel">Все города</span>
+      </p>
+
+      <p class="hero-subtitle">Станьте частью добрых дел в вашем городе!</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" data-goto="ngos">Найти НКО</button>
+        <button class="btn btn-ghost" data-goto="calendar">Календарь событий</button>
+        <button class="btn btn-ghost" data-goto="knowledge">База знаний</button>
+        <button class="btn btn-ghost" data-goto="news">Новости и гранты</button>
+      </div>
+    </div>
+
+    <div class="home-grid">
+      <!-- НКО по городу -->
+      <div class="card">
+        <div class="card-title">
+          НКО в городе <span id="homeCityTitle">Все города</span>
+        </div>
+        <div class="card-meta">
+          Найдено организаций: <span id="homeNgoCount">0</span>
+        </div>
+        <p>Посмотрите, какие инициативы уже работают и куда можно присоединиться.</p>
+      </div>
+      
+      <!-- Ближайшее событие по городу -->
+      <div class="card">
+        <div class="card-title">Ближайшее событие</div>
+        <div class="event-date" id="homeNextEventDate"></div>
+        <p id="homeNextEventText">
+          Выберите город, чтобы увидеть ближайшее событие.
+        </p>
+      </div>
+
+      <!-- Можно оставить общей карточкой -->
+      <div class="card">
+        <div class="card-title">Новый материал в базе знаний</div>
+        <p>Вебинар «Как организовать волонтёрскую акцию в малом городе».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- НКО -->
+  <section id="page-ngos" class="page">
+    <div class="section-header">
+      <h2>Некоммерческие организации</h2>
+      <small>Список НКО в городах присутствия Росатома</small>
+    </div>
+    <div class="filters">
+      <input type="text" id="ngoSearch" placeholder="Поиск по названию НКО" />
+      <select id="ngoCategory">
+        <option value="all">Все направления</option>
+        <option value="social">Социальные</option>
+        <option value="eco">Экологические</option>
+        <option value="culture">Культурные</option>
+        <option value="sport">Спорт</option>
+      </select>
+      <button class="btn btn-ghost" id="addNgoBtn">+ Добавить НКО</button>
+    </div>
+    <div id="ngoList" class="cards-list">
+      <!-- Пример НКО -->
+      <article class="card" data-city="Сосновый Бор" data-category="eco">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <div class="card-title">«Чистый Берег»</div>
+          <div class="badge-city">Сосновый Бор</div>
+          <div class="favorite-toggle" data-type="ngo" data-id="ngo1">☆</div>
+        </div>
+        <div class="card-meta">Экологические инициативы</div>
+        <p>
+          Организация проводит регулярные субботники, акции по раздельному сбору
+          отходов и экологическое просвещение школьников. Волонтёры помогают
+          в организации мероприятий, регистрации участников и информационной поддержке.
+        </p>
+        <p style="font-size:12px; margin-top:6px;">
+          Адрес: ул. Центральная, 10<br/>
+          Сайт: <a href="#" target="_blank">clean-coast.example</a>
+        </p>
+      </article>
+
+      <article class="card" data-city="Обнинск" data-category="social">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <div class="card-title">«Тепло рядом»</div>
+          <div class="badge-city">Обнинск</div>
+          <div class="favorite-toggle" data-type="ngo" data-id="ngo2">☆</div>
+        </div>
+        <div class="card-meta">Социальная поддержка</div>
+        <p>
+          Помощь пожилым людям и семьям с детьми: доставка продуктов, сопровождение
+          в поликлинику, мастер-классы. Волонтёры участвуют в выездных акциях и онлайн-поддержке.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- База знаний -->
+  <section id="page-knowledge" class="page">
+    <div class="section-header">
+      <h2>База знаний</h2>
+      <small>Материалы для НКО и волонтёров</small>
+    </div>
+    <div class="filters">
+      <select id="kbCategory">
+        <option value="all">Все категории</option>
+        <option value="training">Обучение волонтёров</option>
+        <option value="management">Управление НКО</option>
+        <option value="fundraising">Фандрайзинг и гранты</option>
+      </select>
+      <button class="btn btn-ghost" id="addKbBtn">+ Добавить материал</button>
+    </div>
+    <div id="kbList" class="cards-list">
+      <article class="card" data-category="training">
+        <div class="kb-type">Видео</div>
+        <div class="card-title">Введение в корпоративное волонтёрство</div>
+        <p>Запись вебинара для координаторов и активных волонтёров.</p>
+        <div style="margin-top:8px;">
+          <button class="btn btn-primary" style="font-size:12px;">Смотреть видео</button>
+        </div>
+      </article>
+
+      <article class="card" data-category="management">
+        <div class="kb-type">PDF</div>
+        <div class="card-title">Памятка по организации городских мероприятий</div>
+        <p>Чек-лист шагов для безопасного и эффективного проведения акций.</p>
+        <div style="margin-top:8px;">
+          <button class="btn btn-ghost" style="font-size:12px;">Скачать PDF</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Календарь -->
+  <section id="page-calendar" class="page">
+    <div class="section-header">
+      <h2>Календарь событий</h2>
+      <small>Мероприятия НКО по городам</small>
+    </div>
+    <div class="filters">
+      <select id="eventType">
+        <option value="all">Все типы событий</option>
+        <option value="eco">Экология</option>
+        <option value="social">Социальные</option>
+        <option value="culture">Культура</option>
+        <option value="sport">Спорт</option>
+      </select>
+      <button class="btn btn-ghost" id="addEventBtn">+ Добавить событие</button>
+    </div>
+    <div id="eventList" class="cards-list">
+      <article class="card" data-city="Сосновый Бор" data-type="eco">
+        <div class="event-date">18 ноября 2025 · 10:00</div>
+        <div class="card-title">Эко-субботник на набережной</div>
+        <div class="card-meta">Организатор: «Чистый Берег» · Сосновый Бор</div>
+        <p>Уборка береговой линии и мастер-класс по раздельному сбору отходов.</p>
+        <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
+          <button class="btn btn-primary" style="font-size:12px;">Записаться</button>
+          <div class="favorite-toggle" data-type="event" data-id="event1">☆</div>
+        </div>
+      </article>
+
+      <article class="card" data-city="Обнинск" data-type="social">
+        <div class="event-date">25 ноября 2025 · 15:00</div>
+        <div class="card-title">Волонтёрский визит в дом ветеранов</div>
+        <div class="card-meta">Организатор: «Тепло рядом» · Обнинск</div>
+        <p>Творческие мастер-классы и концерт для жителей дома ветеранов.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Новости -->
+  <section id="page-news" class="page">
+    <div class="section-header">
+      <h2>Новости и гранты</h2>
+      <small>Лента новостей Росатома и НКО</small>
+    </div>
+    <div class="filters">
+      <select id="newsScope">
+        <option value="all">Все новости</option>
+        <option value="city">По выбранному городу</option>
+        <option value="global">Общая лента</option>
+      </select>
+      <button class="btn btn-ghost" id="addNewsBtn">+ Добавить новость</button>
+    </div>
+    <div id="newsList" class="cards-list">
+      <article class="card" data-city="all">
+        <div class="news-date">15 ноября 2025 · Все города</div>
+        <div class="card-title">Запуск портала «Добрые дела Росатома»</div>
+        <p>Открылся единый портал для НКО, волонтёров и жителей малых городов присутствия Росатома.</p>
+      </article>
+
+      <article class="card" data-city="Обнинск">
+        <div class="news-date">10 ноября 2025 · Обнинск</div>
+        <div class="card-title">Обнинские волонтёры выиграли грант</div>
+        <p>Проект поддержки одиноких пожилых людей получил финансирование в конкурсе социальных инициатив.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Личный кабинет -->
+  <section id="page-profile" class="page">
+    <div class="section-header">
+      <h2>Личный кабинет</h2>
+      <small>Заглушка для демонстрации функционала</small>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-title">Авторизация</div>
+      <p style="font-size:13px; margin-top:4px;">
+        Для прототипа можно реализовать простую форму входа (email + пароль) без реального backend.
+        На хакатоне достаточно показать сценарий входа и условное отображение данных.
+      </p>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-title">Избранное</div>
+      <p style="font-size:13px; margin-top:4px;">
+        Здесь будут отображаться избранные НКО, события и материалы базы знаний,
+        выбранные пользователем (можно хранить в localStorage).
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Моя организация / события</div>
+      <p style="font-size:13px; margin-top:4px;">
+        Для представителей НКО здесь можно показывать страницу с информацией об организации
+        и форму добавления событий. Для администратора — интерфейс модерации.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Портал «Добрые дела Росатома». Прототип для хакатона. Данные и дизайн условные, возможна дальнейшая доработка.
+</footer>
+ <script src="js/script.js"></script>
+</body>
+</html>
