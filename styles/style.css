@@ -23,40 +23,43 @@
       top: 0;
       z-index: 10;
     }
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      gap: 16px;
-    }
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  gap: 16px;
+}
+
 .logo-block {
   display: flex;
   align-items: center;
   gap: 8px;
+  
 }
 
-/* небольшой квадрат-контейнер под логотип */
 .logo-circle {
-  width: 40px;      /* размер, который увидишь в шапке */
+  width: 40px;
   height: 40px;
   border: none;
-  border-radius: 50%;     /* можно убрать, если не нужен круг */
-  overflow: hidden;       /* обрезаем лишний “ореол” */
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;        /* не даём самому кругу сжиматься */
 }
 
-/* сильно увеличиваем сам логотип внутри и обрезаем края */
 .logo-circle .logo-img {
-  width: 260%;      /* поиграйся: 220–300% */
+  width: 260%;
   height: 260%;
   object-fit: cover;
   display: block;
 }
+
+
    .site-title {
   font-weight: 700;
   font-size: 15px;
