@@ -132,6 +132,52 @@
       </div>
     </div>
   </div>
+
+<div class="home-extra">
+    <div class="section-header">
+      <h2>Кому будет полезен портал</h2>
+      <small>Разные роли — единое пространство для добрых дел</small>
+    </div>
+
+    <div class="cards-list">
+      <article class="card">
+        <div class="card-title">Жителям и волонтёрам</div>
+        <div class="card-meta">Найти инициативы рядом</div>
+        <p>
+          Узнайте, какие НКО и волонтёрские проекты работают в вашем городе,
+          выберите интересное направление и присоединяйтесь к команде.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-title">НКО и инициативные группы</div>
+        <div class="card-meta">Продвижение проектов</div>
+        <p>
+          Размещайте информацию об организации, публикуйте события и новости,
+          привлекайте новых волонтёров и партнёров.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-title">Корпоративные волонтёры Росатома</div>
+        <div class="card-meta">Выбор проверенных инициатив</div>
+        <p>
+          Находите надёжные проекты в городах присутствия, планируйте участие
+          сотрудников и фиксируйте результаты добрых дел.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-title">Координаторы КСО и администраторы</div>
+        <div class="card-meta">Единая точка управления</div>
+        <p>
+          Ведите единую базу НКО, событий и новостей, модерируйте заявки,
+          формируйте карту добрых дел по всем городам присутствия.
+        </p>
+      </article>
+    </div>
+  </div>
+  
 </section>
 
 
@@ -260,80 +306,102 @@
     </div>
   </section>
 
-   <section id="page-map" class="page">
-    <div class="section-header">
-      <h2>Карта добрых дел</h2>
-      <small>Инициативы и события на карте городов присутствия Росатома</small>
+  <section id="page-map" class="page">
+  <div class="section-header">
+    <h2>Карта добрых дел</h2>
+    <small>Посмотрите, где в вашем городе уже происходят добрые дела</small>
+  </div>
+
+  <div class="map-layout">
+    <!-- Левая колонка: карта -->
+    <div class="map-wrapper">
+      <div class="map-frame">
+        <script
+          type="text/javascript"
+          charset="utf-8"
+          async
+          src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7312f3f3a290e1b16153a66247686c931fe43663496d62f64a153945b0fe8b34&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true">
+        </script>
+      </div>
+      <p class="map-caption">
+        На карте отмечены НКО и события в городах присутствия Росатома. 
+        Приближайте карту, нажимайте на точки и узнавайте, какие инициативы есть рядом с вами.
+      </p>
     </div>
 
-    <div class="filters">
-      <select id="mapCityFilter">
-        <option value="all">Все города</option>
-        <option>Ангарск</option>
-        <option>Байкальск</option>
-        <option>Балаково</option>
-        <option>Билибино</option>
-        <option>Волгодонск</option>
-        <option>Глазов</option>
-        <option>Десногорск</option>
-        <option>Димитровград</option>
-        <option>Железногорск</option>
-        <option>Заречный (Пензенская обл.)</option>
-        <option>Заречный (Свердловская обл.)</option>
-        <option>Зеленогорск</option>
-        <option>Краснокаменск</option>
-        <option>Курчатов</option>
-        <option>Лесной</option>
-        <option>Неман</option>
-        <option>Нововоронеж</option>
-        <option>Новоуральск</option>
-        <option>Обнинск</option>
-        <option>Озерск</option>
-        <option>Певек</option>
-        <option>Полярные Зори</option>
-        <option>Саров</option>
-        <option>Северск</option>
-        <option>Снежинск</option>
-        <option>Советск</option>
-        <option>Сосновый Бор</option>
-        <option>Трехгорный</option>
-        <option>Удомля</option>
-        <option>Усолье-Сибирское</option>
-        <option>Электросталь</option>
-        <option>Энергодар</option>
-      </select>
-      <span style="font-size:13px; color: var(--muted);">
-        В финальной версии здесь будет интерактивная карта (Яндекс/Leaflet). 
-        В прототипе — заглушка и описание сценариев.
-      </span>
-    </div>
+    <!-- Правая колонка: фильтры и описание -->
+    <div class="map-side">
+      <div class="filters">
+        <select id="mapCityFilter">
+          <option value="all">Все города</option>
+          <option>Ангарск</option>
+          <option>Байкальск</option>
+          <option>Балаково</option>
+          <option>Билибино</option>
+          <option>Волгодонск</option>
+          <option>Глазов</option>
+          <option>Десногорск</option>
+          <option>Димитровград</option>
+          <option>Железногорск</option>
+          <option>Заречный (Пензенская обл.)</option>
+          <option>Заречный (Свердловская обл.)</option>
+          <option>Зеленогорск</option>
+          <option>Краснокаменск</option>
+          <option>Курчатов</option>
+          <option>Лесной</option>
+          <option>Неман</option>
+          <option>Нововоронеж</option>
+          <option>Новоуральск</option>
+          <option>Обнинск</option>
+          <option>Озерск</option>
+          <option>Певек</option>
+          <option>Полярные Зори</option>
+          <option>Саров</option>
+          <option>Северск</option>
+          <option>Снежинск</option>
+          <option>Советск</option>
+          <option>Сосновый Бор</option>
+          <option>Трехгорный</option>
+          <option>Удомля</option>
+          <option>Усолье-Сибирское</option>
+          <option>Электросталь</option>
+          <option>Энергодар</option>
+        </select>
+        <span style="font-size:13px; color: var(--muted);">
+          Выберите город, чтобы увидеть, где проходят акции, мероприятия и работают НКО.
+        </span>
+      </div>
 
-    <div class="cards-list">
-      <article class="card">
-        <div class="card-title">Интерактивная карта инициатив</div>
-        <div class="card-meta">Прототип функционала</div>
-        <p>
-          На карте пользователь сможет выбрать город присутствия Росатома
-          и увидеть активные НКО, точки проведения мероприятий и ключевые площадки.
-        </p>
-        <p style="font-size:13px; margin-top:6px;">
-          В рабочей версии здесь будет интеграция с картографическим сервисом
-          (Яндекс.Карты / 2ГИС / Leaflet) и фильтрами по типу инициатив.
-        </p>
-      </article>
+      <div class="cards-list map-cards">
+        <article class="card">
+          <div class="card-title">Найдите добрые дела рядом</div>
+          <div class="card-meta">НКО и события на карте</div>
+          <p>
+            Ориентируйтесь по карте, чтобы быстро понять, в каких районах вашего города
+            проходят акции, субботники, мастер-классы и другие инициативы.
+          </p>
+          <p style="font-size:13px; margin-top:6px;">
+            Нажимайте на точки, изучайте описание инициатив и переходите в карточку НКО
+            или события, чтобы узнать детали и зарегистрироваться на участие.
+          </p>
+        </article>
 
-      <article class="card">
-        <div class="card-title">Сценарии использования</div>
-        <div class="card-meta">Для жителей и координаторов</div>
-        <ul style="font-size:13px; margin-left:16px; margin-top:4px;">
-          <li>Найти ближайшие события по интересам и городу.</li>
-          <li>Увидеть, какие НКО действуют в своём районе.</li>
-          <li>Координаторам КСО — планировать акции по локациям.</li>
-          <li>Показать наглядную карту добрых дел для отчётности и коммуникаций.</li>
-        </ul>
-      </article>
+        <article class="card">
+          <div class="card-title">Как пользоваться картой</div>
+          <div class="card-meta">Несколько простых шагов</div>
+          <ul style="font-size:13px; margin-left:16px; margin-top:4px;">
+            <li>Выберите город в списке или переместите карту вручную.</li>
+            <li>Приблизьте нужный район, чтобы увидеть все точки рядом.</li>
+            <li>Откройте интересующую инициативу и узнайте, как присоединиться.</li>
+            <li>Используйте карту, чтобы планировать участие в акциях по пути домой или на работу.</li>
+          </ul>
+        </article>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
 
   <!-- Новости -->
   <section id="page-news" class="page">
